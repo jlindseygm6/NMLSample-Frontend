@@ -1,0 +1,71 @@
+﻿@model IEnumerable<NMLSample.Models.Beer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Beer Listing</h2>
+<p>
+
+    @using (Ajax.BeginForm("Index", "Beer",new AjaxOptions
+        {
+            HttpMethod="POST",OnSuccess= "onAjaxRequestSuccess"
+        }, new { @id = "AjaxformId", @class = "form-horizontal", role = "form"
+        }
+        ))
+    {
+    <p>
+        Beer Name: @Html.TextBox("SearchString") <input type="submit" value="Filter" />
+    </p>
+    }
+</p>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tagline)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.first_brewed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.contributed_by)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.image_url)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tagline)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.first_brewed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.contributed_by)
+        </td>
+        <td>
+            <img src="@Html.Raw(item.image_url)" width="100px" alt="this is it">
+        </td>
+    </tr>
+}
+
+</table>
+<br/>
